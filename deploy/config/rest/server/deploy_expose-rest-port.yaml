@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: obnpctl
+spec:
+  selector:
+    matchLabels:
+      app: obnpctl
+  template:
+    spec:
+      containers:
+      - name: cli
+        ports:
+        - containerPort: 8090
+          name: rest-endpoint

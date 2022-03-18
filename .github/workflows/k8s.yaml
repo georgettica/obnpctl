@@ -1,0 +1,42 @@
+name: k8s deployment validation
+on:
+  pull_request:
+  push:
+   # this makes this run much less frequent
+   #paths:
+   #  - 'deploy/*'
+   #  - '.github/workflows/k8s.yaml'
+
+jobs:
+  check-k8s:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate with Kubeval
+        uses: vetyy/kubeval-action@master
+        with:
+          additional_schema_locations: https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/
+          files: ./deploy
+          ignore_missing_schemas: true
+          ignored_path_patterns: .*kustomization.yaml
+          strict: true
+
+ # maybe I will be able to do this (currently not willing to pull image secrets here
+ #run-k8s-deployment:
+ #  runs-on: ubuntu-latest
+ #  steps:
+ #    - name: Checkout code
+ #      uses: actions/checkout@v2
+ #    - name: Start minikube
+ #      uses: medyagh/setup-minikube@v0.0.7
+ #      with:
+ #        minikube-version: latest
+ #        kubernetes-version: stable
+ #    - name: Setup go-task/task
+ #      uses: lukeshay/setup-task@v1
+ #    - name: Install Go
+ #      uses: actions/setup-go@v2
+ #      with:
+ #        go-version: x
+ #    - name: Test
+ #      run: task deploy-up

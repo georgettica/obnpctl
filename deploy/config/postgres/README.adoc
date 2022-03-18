@@ -1,0 +1,15 @@
+
+
+connect to the container
+
+----
+oc rsh $(oc get po -l app=obnpctl,comm-type=postgres,component=client -oname)
+----
+
+run commands inside
+
+----
+export  PGPASSWORD=$(cat password)
+psql -d $(cat dbname) -U $(cat user) -h $(cat host)
+cat host
+----
