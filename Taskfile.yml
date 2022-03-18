@@ -1,0 +1,57 @@
+# https://taskfile.dev
+
+version: '3'
+
+env:
+  COBRA_CLI_VERSION: v1.3.0
+  GOLANGCI_LINT_VERSION: v1.44.2
+  GORELEASER_VERSION: v1.6.3
+tasks:
+  default:
+    deps: 
+      - build
+      - lint
+
+  # in case you want to use go install for stuff
+  cli:
+    cmds:
+      - GOBIN=${PWD} go install .
+    generates:
+      - obnpctl
+
+  test-with-coverage:
+    deps: 
+      - lint
+    cmds:
+      - go test -covermode atomic -coverprofile='profile.cov' ./...
+    generates:
+      - profile.cov
+
+  build:
+    cmds:
+      - ./bin/goreleaser release 
+          --snapshot 
+          --rm-dist 
+          --skip-sign # cosign only works for github actions
+  
+  lint:
+    deps: 
+      - golangci-lint
+    cmds:
+      - ./bin/golangci-lint run
+
+  cobra-cli:
+    cmds:
+      - GOBIN=${PWD}/bin go install -mod=readonly github.com/spf13/cobra-cli@${COBRA_CLI_VERSION}
+    generates:
+      - bin/cobra
+  golangci-lint:
+    cmds:
+      - GOBIN=${PWD}/bin go install -mod=readonly github.com/golangci/golangci-lint/cmd/golangci-lint@${GOLANGCI_LINT_VERSION}
+    generates:
+      - bin/golangci-lint
+  goreleaser:
+    cmds:
+      - GOBIN=${PWD}/bin go install -mod=readonly github.com/goreleaser/goreleaser@${GORELEASER_VERSION}
+    generates:
+      - bin/goreleaser
