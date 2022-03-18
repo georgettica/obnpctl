@@ -1,0 +1,8 @@
+= OBNPCTL
+Ron Green <8326+rogreen@users.noreply.gitlab.cee.redhat.com>
+
+OpenShift Basic Networking Persentation (obnp) is a tool for a presentation on basic networking principals on OpenShift
+
+== Tools Used
+to compile use https://taskfile.dev[an alternative of make]
+
