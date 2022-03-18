@@ -26,10 +26,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "obnctl",
 	Short: "OpenShift Basic Network Presetation CLI",
-	Long:  `This tool will run REST commands and `,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Long:  `This tool will run REST commands and DB connection`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
