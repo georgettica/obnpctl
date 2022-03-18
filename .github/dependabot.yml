@@ -19,6 +19,5 @@ updates:
       interval: "daily"
   - package-ecosystem: "gomod" 
     directory: "/" 
-    vendor: true
     schedule:
       interval: "daily"
