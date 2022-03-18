@@ -17,25 +17,43 @@ package server
 
 import (
 	"fmt"
+	"net/http"
+	"time"
 
+	"github.com/georgettica/obnpctl/pkg/consts"
 	"github.com/spf13/cobra"
 )
 
 // serverCmd represents the server command.
 var serverCmd = &cobra.Command{
 	Use:   "server",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("server called")
-	},
+	Short: "A command to run a server in the background",
+	RunE:  run,
 }
 
+var serverCmdArgs = struct {
+	port int
+}{
+	port: consts.Port,
+}
+
+func run(cmd *cobra.Command, args []string) error {
+	http.HandleFunc("/", fooHandler)
+
+	err := http.ListenAndServe(fmt.Sprintf(":%d", serverCmdArgs.port), nil)
+	if err != nil {
+		return fmt.Errorf("error serving on port %d: %w", serverCmdArgs.port, err)
+	}
+
+	return nil
+}
+
+func fooHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "%v: Hello\n", time.Now())
+	fmt.Printf("%v: Hello\n", time.Now())
+}
+
+// GetCmd will return the current command.
 func GetCmd() *cobra.Command {
 	return serverCmd
 }
