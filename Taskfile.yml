@@ -6,6 +6,7 @@ env:
   COBRA_CLI_VERSION: v1.3.0
   GOLANGCI_LINT_VERSION: v1.44.2
   GORELEASER_VERSION: v1.6.3
+
 tasks:
   default:
     deps: 
@@ -15,9 +16,16 @@ tasks:
   # in case you want to use go install for stuff
   cli:
     cmds:
+      - export
       - GOBIN=${PWD} go install .
     generates:
       - obnpctl
+    sources:
+      - ./**/*.go
+      - go.mod
+      - go.sum
+    status:
+      - test -f obnpctl
 
   test-with-coverage:
     deps: 
@@ -26,6 +34,8 @@ tasks:
       - go test -covermode atomic -coverprofile='profile.cov' ./...
     generates:
       - profile.cov
+    status:
+      - test -f profile.cov
 
   build:
     deps: 
@@ -37,12 +47,20 @@ tasks:
           --skip-sign # cosign only works for github actions
     generates:
       - dist/**
+    sources:
+      - ./**/*.go
+      - go.mod
+      - go.sum
   
   lint:
     deps: 
-       - golangci-lint
+      - golangci-lint
     cmds:
       - ./bin/golangci-lint run
+    sources:
+      - ./**/*.go
+      - go.mod
+      - go.sum
 
   lint-fix:
     deps: 
@@ -55,13 +73,19 @@ tasks:
       - GOBIN=${PWD}/bin go install -mod=readonly github.com/spf13/cobra-cli@${COBRA_CLI_VERSION}
     generates:
       - bin/cobra
+    status:
+      - test -f bin/cobra
   golangci-lint:
     cmds:
       - GOBIN=${PWD}/bin go install -mod=readonly github.com/golangci/golangci-lint/cmd/golangci-lint@${GOLANGCI_LINT_VERSION}
     generates:
       - bin/golangci-lint
+    status:
+      - test -f bin/golangci-lint
   goreleaser:
     cmds:
       - GOBIN=${PWD}/bin go install -mod=readonly github.com/goreleaser/goreleaser@${GORELEASER_VERSION}
     generates:
       - bin/goreleaser
+    status:
+      - test -f bin/goreleaser

@@ -7,6 +7,11 @@ before:
     # you may remove this if you don't need go generate
     - go generate ./...
     - which syft
+
+env:
+  # to allow github to override it if I need to 
+  - GITHUB_REPOSITORY_OWNER={{ if index .Env "GITHUB_REPOSITORY_OWNER"  }}{{ .Env.GITHUB_REPOSITORY_OWNER }}{{ else }}georgettica{{ end }}
+
 builds:
   - env:
       - CGO_ENABLED=0
@@ -20,6 +25,15 @@ builds:
       - darwin
       - linux
       - windows
+
+dockers:
+  - image_templates:
+    - ghcr.io/{{.Env.GITHUB_REPOSITORY_OWNER}}/{{ .ProjectName }}:latest
+    - ghcr.io/{{.Env.GITHUB_REPOSITORY_OWNER}}/{{ .ProjectName }}:{{ .Version }}
+    ids:
+      - obnpctl
+    dockerfile: ./hack/Dockerfile.goreleaser
+
 archives:
   - replacements:
       386: i386
