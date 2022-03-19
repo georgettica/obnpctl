@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: obnpctl
+spec:
+  ports:
+  - port: 8090
+    protocol: TCP
+    targetPort: rest-endpoint
+  selector:
+    app: obnpctl
+    component: server
+    comm-type: rest
+  sessionAffinity: None
+  type: ClusterIP
