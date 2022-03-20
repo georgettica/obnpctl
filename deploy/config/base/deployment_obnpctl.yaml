@@ -14,6 +14,7 @@ spec:
       labels:
         app: obnpctl
     spec:
+      automountServiceAccountToken: false
       containers:
       - command:
         - bash
@@ -23,5 +24,9 @@ spec:
         stdin: true
         stdinOnce: true
         tty: true
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "13Mi"
       imagePullSecrets:
       - name: georgettica-ghcr-registry
