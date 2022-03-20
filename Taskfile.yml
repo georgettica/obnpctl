@@ -78,14 +78,19 @@ tasks:
       - oc
     cmds:
       - ./bin/kustomize build ./deploy/config/ | oc apply -f -
-      - ./deploy/config/is_ready.sh
+      - ./deploy/config/is_up.sh
+    sources:
+      - ./deploy/
+     
   deploy-down:
     deps:
       - kustomize
       - oc
     cmds:
-      - ./bin/kustomize build ./deploy/config/ | oc delete -f -
-
+      - ./bin/kustomize build ./deploy/config/ | oc delete -f - --ignore-not-found
+      - ./deploy/config/is_down.sh
+    sources:
+      - ./deploy/
 
   cobra-cli:
     cmds:
