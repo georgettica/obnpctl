@@ -96,9 +96,10 @@ tasks:
     cmds:
       - GOBIN=${PWD}/bin go install -mod=readonly github.com/spf13/cobra-cli@${COBRA_CLI_VERSION}
     generates:
-      - bin/cobra
+      - bin/cobra-cli
     status:
-      - test -f bin/cobra
+      - test -f bin/cobra-cli
+      
   golangci-lint:
     cmds:
       - GOBIN=${PWD}/bin go install -mod=readonly github.com/golangci/golangci-lint/cmd/golangci-lint@${GOLANGCI_LINT_VERSION}
@@ -106,6 +107,7 @@ tasks:
       - bin/golangci-lint
     status:
       - test -f bin/golangci-lint
+      
   goreleaser:
     cmds:
       - GOBIN=${PWD}/bin go install -mod=readonly github.com/goreleaser/goreleaser@${GORELEASER_VERSION}
@@ -113,6 +115,7 @@ tasks:
       - bin/goreleaser
     status:
       - test -f bin/goreleaser
+      
   kustomize:
     cmds:
       - GOBIN=${PWD}/bin go install -mod=readonly sigs.k8s.io/kustomize/kustomize/${KUSTOMIZE_MAJOR}@${KUSTOMIZE_VERSION}
@@ -120,6 +123,7 @@ tasks:
       - bin/kustomize
     status:
       - test -f bin/kustomize
+      
   kubectl-slice:
     cmds:
       - GOBIN=${PWD}/bin go install -mod=readonly github.com/patrickdappollonio/kubectl-slice@${KUBECTL_SLICE_VERSION}
@@ -127,6 +131,7 @@ tasks:
       - bin/kubectl-slice
     status:
       - test -f bin/kubectl-slice
+      
   oc:
     status:
       - test which oc
