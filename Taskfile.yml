@@ -28,17 +28,27 @@ tasks:
       - profile.cov
 
   build:
+    deps: 
+      - goreleaser
     cmds:
       - ./bin/goreleaser release 
           --snapshot 
           --rm-dist 
           --skip-sign # cosign only works for github actions
+    generates:
+      - dist/**
   
   lint:
     deps: 
-      - golangci-lint
+       - golangci-lint
     cmds:
       - ./bin/golangci-lint run
+
+  lint-fix:
+    deps: 
+       - golangci-lint
+    cmds:
+      - ./bin/golangci-lint run --fix
 
   cobra-cli:
     cmds:
