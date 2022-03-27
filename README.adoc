@@ -18,6 +18,14 @@ export PATH=${PWD}/bin:${PATH}
 task deploy-up
 ----
 
+== Topic to go through:
+
+=== How I set it up
+=== How the code looks like
+=== The k8s resources used
+=== What is kustomize and how I use it to deploy
+=== Basic startup-teardown of the tool
+
 == Tools Used
 
 === Task
