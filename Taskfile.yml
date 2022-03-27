@@ -79,8 +79,6 @@ tasks:
     cmds:
       - ./bin/kustomize build ./deploy/config/ | oc apply -f -
       - ./deploy/config/is_up.sh
-    sources:
-      - ./deploy/
      
   deploy-down:
     deps:
@@ -89,8 +87,6 @@ tasks:
     cmds:
       - ./bin/kustomize build ./deploy/config/ | oc delete -f - --ignore-not-found
       - ./deploy/config/is_down.sh
-    sources:
-      - ./deploy/
 
   cobra-cli:
     cmds:
