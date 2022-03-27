@@ -11,5 +11,4 @@ run commands inside
 ----
 export  PGPASSWORD=$(cat password)
 psql -d $(cat dbname) -U $(cat user) -h $(cat host)
-cat host
 ----

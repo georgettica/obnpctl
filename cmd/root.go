@@ -25,7 +25,7 @@ import (
 // rootCmd represents the base command when called without any subcommands.
 var rootCmd = &cobra.Command{
 	Use:   "obnctl",
-	Short: "OpenShift Basic Network Presetation CLI",
+	Short: "OpenShift Basic Network Presentation CLI",
 	Long:  `This tool will run REST commands and DB connection`,
 }
 

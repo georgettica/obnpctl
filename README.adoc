@@ -3,6 +3,21 @@ Ron Green <8326+rogreen@users.noreply.gitlab.cee.redhat.com>
 
 OpenShift Basic Networking Persentation (obnp) is a tool for a presentation on basic networking principals on OpenShift
 
+== What this tool provides
+Basically you can invoke a basic client server code.
+
+Additionally the deployment folder has an additional feature which is to deploy a Postgres server and CLI that can connect to it
+use
+
+----
+export PATH=${PWD}/bin:${PATH}
+# install task (not explained here)
+# connect to the cluster you want (not explained here)
+# start the test
+task deploy-up
+----
+
+
 == Tools Used
 to compile use https://taskfile.dev[an alternative of make]
 
