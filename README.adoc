@@ -1,5 +1,6 @@
 = OBNPCTL
 Ron Green <8326+rogreen@users.noreply.gitlab.cee.redhat.com>
+:toc:
 
 OpenShift Basic Networking Persentation (obnp) is a tool for a presentation on basic networking principals on OpenShift
 
@@ -17,7 +18,22 @@ export PATH=${PWD}/bin:${PATH}
 task deploy-up
 ----
 
-
 == Tools Used
-to compile use https://taskfile.dev[an alternative of make]
 
+=== Task
+to compile use https://taskfile.dev[an alternative of make]. see the link:Taskfile.yml[Task config file]
+
+=== kustomize
+https://kustomize.io/[kustomize] is a tool to make k8s files easier to compose together. it allows me to use the https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY method].
+
+=== kubectl-slice
+https://github.com/patrickdappollonio/kubectl-slice[kubectl-slice] is a nice tool to filter files from a stream. used to extract certain types from the `kustomize build` output
+
+=== goreleaser
+https://github.com/goreleaser/goreleaser[goreleaser] is used to build and deploy the tool. see the link:.goreleaser.yaml[goreleaser config file] 
+
+=== cobra-cli
+https://github.com/spf13/cobra-cli[cobra-cli] is the tool used to add new components to the CLI
+
+=== golangci-lint
+https://github.com/golangci/golangci-lint[golangci-lint] is used to validate the code I write. see the link:.golangci.yml[golangci-lint config file]
