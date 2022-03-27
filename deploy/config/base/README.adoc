@@ -1,0 +1,13 @@
+this will only work on my machine as I cannot push the secret here
+
+to load it run the command:
+
+----
+oc create secret docker-registry \
+  georgettica-ghcr-registry \
+  --docker-username=georgettica \
+  --docker-password=XXX \
+  --docker-server=ghcr.io
+----
+
+and to get the password, use the manual in https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry[the github docs url]

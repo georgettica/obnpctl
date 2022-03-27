@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  component: server
+resources:
+- ../../base
+- service_obnctl.yaml
+patchesStrategicMerge:
+- deploy_expose-rest-port.yaml
+- deploy_make-server-wait.yaml
+nameSuffix: -server

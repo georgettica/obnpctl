@@ -6,6 +6,9 @@ env:
   COBRA_CLI_VERSION: v1.3.0
   GOLANGCI_LINT_VERSION: v1.44.2
   GORELEASER_VERSION: v1.6.3
+  KUBECTL_SLICE_VERSION: v1.2.1
+  KUSTOMIZE_MAJOR: v4
+  KUSTOMIZE_VERSION: v4.5.2
 
 tasks:
   default:
@@ -68,6 +71,22 @@ tasks:
     cmds:
       - ./bin/golangci-lint run --fix
 
+  deploy-up:
+    deps: 
+      - kustomize
+      - kubectl-slice
+      - oc
+    cmds:
+      - ./bin/kustomize build ./deploy/config/ | oc apply -f -
+      - ./deploy/config/is_ready.sh
+  deploy-down:
+    deps:
+      - kustomize
+      - oc
+    cmds:
+      - ./bin/kustomize build ./deploy/config/ | oc delete -f -
+
+
   cobra-cli:
     cmds:
       - GOBIN=${PWD}/bin go install -mod=readonly github.com/spf13/cobra-cli@${COBRA_CLI_VERSION}
@@ -89,3 +108,21 @@ tasks:
       - bin/goreleaser
     status:
       - test -f bin/goreleaser
+  kustomize:
+    cmds:
+      - GOBIN=${PWD}/bin go install -mod=readonly sigs.k8s.io/kustomize/kustomize/${KUSTOMIZE_MAJOR}@${KUSTOMIZE_VERSION}
+    generates:
+      - bin/kustomize
+    status:
+      - test -f bin/kustomize
+  kubectl-slice:
+    cmds:
+      - GOBIN=${PWD}/bin go install -mod=readonly github.com/patrickdappollonio/kubectl-slice@${KUBECTL_SLICE_VERSION}
+    generates:
+      - bin/kubectl-slice
+    status:
+      - test -f bin/kubectl-slice
+  oc:
+    status:
+      - test which oc
+

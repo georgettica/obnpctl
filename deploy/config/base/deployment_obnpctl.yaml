@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: obnpctl
+  name: obnpctl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: obnpctl
+  template:
+    metadata:
+      labels:
+        app: obnpctl
+    spec:
+      containers:
+      - command:
+        - bash
+        image: ghcr.io/georgettica/obnpctl:latest
+        workingDir: /home/store
+        name: cli
+        stdin: true
+        stdinOnce: true
+        tty: true
+      imagePullSecrets:
+      - name: georgettica-ghcr-registry
