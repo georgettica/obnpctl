@@ -17,7 +17,10 @@ package server
 
 import (
 	"fmt"
+	"net/http"
+	"time"
 
+	"github.com/georgettica/obnpctl/pkg/consts"
 	"github.com/spf13/cobra"
 )
 
@@ -25,9 +28,29 @@ import (
 var serverCmd = &cobra.Command{
 	Use:   "server",
 	Short: "A command to run a server in the background",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("server called")
-	},
+	RunE:  run,
+}
+
+var serverCmdArgs = struct {
+	port int
+}{
+	port: consts.Port,
+}
+
+func run(cmd *cobra.Command, args []string) error {
+	http.HandleFunc("/", fooHandler)
+
+	err := http.ListenAndServe(fmt.Sprintf(":%d", serverCmdArgs.port), nil)
+	if err != nil {
+		return fmt.Errorf("error serving on port %d: %w", serverCmdArgs.port, err)
+	}
+
+	return nil
+}
+
+func fooHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "%v: Hello\n", time.Now())
+	fmt.Printf("%v: Hello\n", time.Now())
 }
 
 // GetCmd will return the current command.
