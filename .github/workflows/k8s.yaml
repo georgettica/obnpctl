@@ -1,4 +1,7 @@
 name: k8s deployment validation
+permissions: 
+  contents: read
+
 on:
   pull_request:
   push:
