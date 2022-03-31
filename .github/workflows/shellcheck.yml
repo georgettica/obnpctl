@@ -1,4 +1,6 @@
 name: Verify Shell Code
+permissions: 
+  contents: read
 
 on:
   push:
