@@ -1,0 +1,13 @@
+name: Verify URLs Scehduled job
+permissions: 
+  contents: read
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  broken_link_checker_job_cron:
+    uses: .github/workflows/verify-urls.yml@main
