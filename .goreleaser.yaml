@@ -23,8 +23,9 @@ builds:
       - "-w"
     goos:
       - darwin
-      - linux
-      - windows
+      - linux 
+      # dropping support for windows as it is possibly breaking my codebase https://github.com/goreleaser/goreleaser-action/issues/361
+      #- windows
 
 dockers:
   - image_templates:
