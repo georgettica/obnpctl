@@ -23,7 +23,7 @@ jobs:
         check-latest: true
     - name: Install vl
       run: |
-        go install github.com/npxbr/verify-links/cmd/vl@latest
+        go install github.com/ellisonleao/vl/cmd/vl@latest
         echo ${HOME}/go/bin >> $GITHUB_PATH
     # TODO: add caching for this install 
     - name: Check URLs
