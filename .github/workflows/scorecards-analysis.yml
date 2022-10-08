@@ -6,6 +6,7 @@ on:
     - cron: "0 2 * * *"
   push:
     branches: ['main']
+  workflow_dispatch:
 
 # Declare default permissions as read only.
 permissions: 
@@ -18,7 +19,7 @@ jobs:
     permissions:
       # Needed to upload the results to code-scanning dashboard.
       security-events: write
-    
+      id-token: write
     steps:
       - name: "Checkout code"
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 
