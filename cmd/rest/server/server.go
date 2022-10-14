@@ -40,8 +40,14 @@ var serverCmdArgs = struct {
 func run(cmd *cobra.Command, args []string) error {
 	http.HandleFunc("/", fooHandler)
 
-	err := http.ListenAndServe(fmt.Sprintf(":%d", serverCmdArgs.port), nil)
-	if err != nil {
+	headerTimeout := time.Minute
+	s := http.Server{
+		Addr:              fmt.Sprintf(":%d", serverCmdArgs.port),
+		Handler:           nil,
+		ReadHeaderTimeout: headerTimeout,
+	}
+
+	if err := s.ListenAndServe(); err != nil {
 		return fmt.Errorf("error serving on port %d: %w", serverCmdArgs.port, err)
 	}
 

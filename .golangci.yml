@@ -16,10 +16,12 @@ linters:
   enable:
   - asciicheck
   - bidichk
+ #- bodyclose 
   - containedctx
   - decorder
   - dogsled
   - dupl
+ #- exhaustivestruct
  #- forbidigo # we use prints and stuff as this is a dev project
   - forcetypeassert
   - funlen
@@ -41,7 +43,6 @@ linters:
   - goprintffuncname
   - gosec
   - grouper
-  - ifshort
   - lll
   - maintidx
   - misspell
