@@ -3,12 +3,12 @@
 version: '3'
 
 env:
-  COBRA_CLI_VERSION: v1.3.0
-  GOLANGCI_LINT_VERSION: v1.44.2
-  GORELEASER_VERSION: v1.6.3
-  KUBECTL_SLICE_VERSION: v1.2.1
+  COBRA_CLI_VERSION: v1.5.0
+  GOLANGCI_LINT_VERSION: v1.50.0
+  GORELEASER_VERSION: v1.11.5
+  KUBECTL_SLICE_VERSION: v1.2.3
   KUSTOMIZE_MAJOR: v4
-  KUSTOMIZE_VERSION: v4.5.2
+  KUSTOMIZE_VERSION: v4.5.7
 
 tasks:
   default:
@@ -98,7 +98,7 @@ tasks:
       
   golangci-lint:
     cmds:
-      - GOBIN=${PWD}/bin go install -mod=readonly github.com/golangci/golangci-lint/cmd/golangci-lint@${GOLANGCI_LINT_VERSION}
+      - GOBIN=${PWD}/bin go install github.com/golangci/golangci-lint/cmd/golangci-lint@${GOLANGCI_LINT_VERSION}
     generates:
       - bin/golangci-lint
     status:
@@ -106,7 +106,7 @@ tasks:
       
   goreleaser:
     cmds:
-      - GOBIN=${PWD}/bin go install -mod=readonly github.com/goreleaser/goreleaser@${GORELEASER_VERSION}
+      - GOBIN=${PWD}/bin go install  github.com/goreleaser/goreleaser@${GORELEASER_VERSION}
     generates:
       - bin/goreleaser
     status:
