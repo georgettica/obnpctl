@@ -29,9 +29,8 @@ jobs:
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GO111MODULE: off
         run: |
-          go get github.com/mattn/goveralls
+          go install github.com/mattn/goveralls@a36c7ef8f23b2952fa6e39663f52107dfc8ad69d
           $(go env GOPATH)/bin/goveralls -coverprofile=profile.cov -service=github
   release:
     permissions:
