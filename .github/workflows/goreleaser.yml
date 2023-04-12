@@ -21,7 +21,7 @@ jobs:
           go-version: ${{ matrix.go-version }}
           check-latest: ${{ matrix.check-latest }}
       - name: Checkout code
-        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+        uses: actions/checkout@83b7061638ee4956cf7545a6f7efe594e5ad0247
       - name: Setup go-task/task
         uses: lukeshay/setup-task@v1
       - name: Test
@@ -42,7 +42,7 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
       - name: Checkout
-        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+        uses: actions/checkout@83b7061638ee4956cf7545a6f7efe594e5ad0247
         with:
           fetch-depth: 0
       - name: Set up Go
