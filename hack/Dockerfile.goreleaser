@@ -1,4 +1,4 @@
-FROM quay.io/app-sre/ubi8-ubi-minimal:8.8-1072.1696517598 as runner
+FROM quay.io/app-sre/ubi8-ubi-minimal:8.8-1072.1697626218 as runner
 
 COPY ./obnpctl /bin/
 
