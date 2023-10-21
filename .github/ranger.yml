@@ -1,0 +1,9 @@
+labels:
+  # Make all PRs labeled docs get automatically merged
+  'approved (squash)': 
+    action: merge
+  # or else just set merge directly without nesting
+  docs: merge
+# delete the branch when merge is completed
+merges:
+  - action: delete_branch
