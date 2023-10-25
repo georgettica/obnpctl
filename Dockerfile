@@ -1,4 +1,4 @@
-FROM golang:1.19.3-alpine3.15 as builder
+FROM golang:1.19.3-alpine3.15@sha256:eabc3aca6f6c4386369b5b067c9c210aeccd39e76907fa2f8f774fd59d83425a as builder
 
 RUN apk add --update --no-cache ca-certificates tzdata git make bash && update-ca-certificates
 
@@ -11,7 +11,7 @@ RUN go install github.com/go-task/task/v3/cmd/task@latest
 RUN pwd; find
 RUN git update-index --refresh; CGO_ENABLED=0 ${GOPATH}/bin/task
 
-FROM quay.io/app-sre/ubi8-ubi-minimal:8.8-1072.1697626218 as runner
+FROM quay.io/app-sre/ubi8-ubi-minimal:8.8-1072.1697626218@sha256:a49924d9d685a35b2d0817ffe9c84f3429d97e9ad29ed3816c389f45564c9e19 as runner
 
 COPY --from=builder /opt/obnpctl /bin/obnpctl
 
