@@ -11,21 +11,29 @@ updates:
       interval: "daily"
     assignees:
       - "georgettica"
+    labels:
+      - "merge when passing"
   - package-ecosystem: "docker" 
     directory: "/hack"
     schedule:
       interval: "daily"
     assignees:
       - "georgettica"
+    labels:
+      - "merge when passing"
   - package-ecosystem: "github-actions" 
     directory: "/"
     schedule:
       interval: "daily"
     assignees:
       - "georgettica"
+    labels:
+      - "merge when passing"
   - package-ecosystem: "gomod" 
     directory: "/" 
     schedule:
       interval: "daily"
     assignees:
       - "georgettica"
+    labels:
+      - "merge when passing"
