@@ -9,15 +9,23 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    assignees:
+      - "georgettica"
   - package-ecosystem: "docker" 
     directory: "/hack"
     schedule:
       interval: "daily"
+    assignees:
+      - "georgettica"
   - package-ecosystem: "github-actions" 
     directory: "/"
     schedule:
       interval: "daily"
+    assignees:
+      - "georgettica"
   - package-ecosystem: "gomod" 
     directory: "/" 
     schedule:
       interval: "daily"
+    assignees:
+      - "georgettica"
