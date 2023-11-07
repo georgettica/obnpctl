@@ -33,7 +33,9 @@ jobs:
         run: pwd; ls; task test-with-coverage
       - name: Send coverage
         run: |
+          echo "before go install"
           go install github.com/cancue/covreport@a406ed7cfab76e35ad77b465908c7695cfa71bb3
+          echo "before covreport run"
           $(go env GOPATH)/bin/covreport -i cover.prof -o cover.html -cutlines 70,40
       - name: Archive code coverage results
         uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
