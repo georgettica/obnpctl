@@ -33,11 +33,14 @@ jobs:
       - name: Test
         run: pwd; ls; task test-with-coverage
       - name: Send coverage
-        env:
-          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          go install github.com/mattn/goveralls@b03136803f261ccad7d5a40b19b25870a394578f # latest
-          $(go env GOPATH)/bin/goveralls -coverprofile=profile.cov -service=github
+          go install github.com/cancue/covreport@a406ed7cfab76e35ad77b465908c7695cfa71bb3
+          $(go env GOPATH)/bin/covreport -i cover.prof -o cover.html -cutlines 70,40
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
+        with:
+          name: code-coverage-report
+          path: cover.html
   release:
     permissions:
       contents: write
