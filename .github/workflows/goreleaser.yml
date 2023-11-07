@@ -10,7 +10,7 @@ jobs:
       contents: read
     strategy:
       matrix:
-        go-version: [ 1.18.x, 1.19.x ]
+        go-version: [ 1.20.x, 1.21 ]
         include:
           - check-latest: true
     runs-on: ubuntu-latest
@@ -32,11 +32,14 @@ jobs:
       - name: Test
         run: pwd; ls; task test-with-coverage
       - name: Send coverage
-        env:
-          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          go install github.com/mattn/goveralls@a36c7ef8f23b2952fa6e39663f52107dfc8ad69d
-          $(go env GOPATH)/bin/goveralls -coverprofile=profile.cov -service=github
+          echo "before go cover run"
+          go tool cover -html=profile.cov -o cover.html
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
+        with:
+          name: code-coverage-report-${{ matrix.go-version }}
+          path: cover.html
   release:
     permissions:
       contents: write
