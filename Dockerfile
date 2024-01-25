@@ -11,7 +11,7 @@ RUN go install github.com/go-task/task/v3/cmd/task@latest
 RUN pwd; find
 RUN git update-index --refresh; CGO_ENABLED=0 ${GOPATH}/bin/task
 
-FROM quay.io/app-sre/ubi8-ubi-minimal:8.9-1108@sha256:d4d48f0ba11d1d480ce64a63df35ab9cb66c5f9dc5988876b78ae474628bcc2e as runner
+FROM quay.io/app-sre/ubi8-ubi-minimal:8.9-1108.1705420507@sha256:70fe679f2a24b76d5e90fee30c1616afc4f96eed13d77a2ad04af0261c928fb1 as runner
 
 COPY --from=builder /opt/obnpctl /bin/obnpctl
 
