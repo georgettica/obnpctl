@@ -26,7 +26,7 @@ jobs:
           go-version: ${{ matrix.go-version }}
           check-latest: ${{ matrix.check-latest }}
       - name: Checkout code
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
       - name: Setup go-task/task
         uses: lukeshay/setup-task@d8cc01de3080f8053806b4f650c687e4890ed992 # v1
       - name: Test
@@ -55,7 +55,7 @@ jobs:
           egress-policy: audit
 
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
         with:
           fetch-depth: 0
       - name: Set up Go
